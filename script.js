@@ -1,27 +1,40 @@
-const newTextDB = {
-   newTexts: []
-};
-      btn = document.querySelector('button'),
-      addForm = document.querySelector('form.add'),      
-      addInput = addForm.querySelector('.adding_input'),
-      textList = document.querySelector('.list'),
-      
-addForm.addEventListener('submit', (event) => {
-   event.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
 
-   const newText = addInput.value;
+   const newTextDB = {
+      newTexts: []   
+   };
 
-   newTextDB.newTexts.push(newText);
-   createTextList(newTextDB.newTexts, textList);
-});
-
-function createTextList(texts, textList) {
-   textList.innerHTML = "";
+         addForm = document.querySelector('form.add'),      
+         addInput = addForm.querySelector('.adding_input'),
+         wrapper = document.querySelector('.tags_area'),
+         textList = wrapper.querySelector('.newlist'),
+         btns = wrapper.querySelectorAll('.reset'),
+        
    
-   newTextDB.newTexts.forEach((text, i) => {
-      textList.innerHTML += 
-   `<li>${text}</li>`;
+   addForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+   
+      const newText = addInput.value;
+         
+      newTextDB.newTexts.push(newText);
+      createTextList(newTextDB.newTexts, textList);
    });
-}
+   
+   function createTextList(texts, textList) {
+      textList.innerHTML = "";
+      
+      newTextDB.newTexts.forEach((text, i) => {
+         textList.innerHTML += 
+      `<li>${text}</li>`;
+      });
 
-createTextList(newTextDB.newTexts, textList);
+   }
+
+   wrapper.addEventListener('click', (event) => {
+      console.dir(event.target);
+      event.target.remove();
+   });
+   
+   createTextList(newTextDB.newTexts, textList);
+   
+});
